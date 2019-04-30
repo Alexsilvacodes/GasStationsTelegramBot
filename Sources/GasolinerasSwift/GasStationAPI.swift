@@ -8,6 +8,7 @@ import Foundation
 #if !os(Linux)
 import CoreLocation
 #endif
+import Telegrammer
 
 enum NetworkError: Error {
     case wrongURL
