@@ -1,1 +1,1 @@
-worker: ./.build/x86_64-unknown-linux/release/GasolinerasSwift
+worker: ./.swift-bin/GasolinerasSwift
