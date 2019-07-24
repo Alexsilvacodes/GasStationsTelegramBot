@@ -1,6 +1,6 @@
 FROM futurejones/swiftlang
 
-RUN apt-get install libssl-dev
+RUN apt update && apt install libssl-dev
 RUN mkdir /gas-stations-spain
 COPY . /gas-stations-spain
 WORKDIR /gas-stations-spain
