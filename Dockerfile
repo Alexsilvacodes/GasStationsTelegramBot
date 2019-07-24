@@ -1,4 +1,4 @@
-FROM futurejones:swiftlang
+FROM futurejones/swiftlang
 
 RUN mkdir /gas-stations-spain
 COPY . /gas-stations-spain
