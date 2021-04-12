@@ -7,7 +7,6 @@
 import Foundation
 
 struct Product: Decodable {
-
     var productID: String
     var name: String
     var shortname: String
@@ -24,5 +23,4 @@ struct Product: Decodable {
         name = try container.decode(String.self, forKey: .name)
         shortname = try container.decode(String.self, forKey: .shortname)
     }
-
 }

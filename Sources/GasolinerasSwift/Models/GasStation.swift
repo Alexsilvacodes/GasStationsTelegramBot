@@ -5,7 +5,6 @@
 //
 
 struct GasStationResponse: Decodable {
-
     var date: String
     var gasStations: [GasStation]
     var message: String
@@ -17,11 +16,9 @@ struct GasStationResponse: Decodable {
         case message = "Nota"
         case result = "ResultadoConsulta"
     }
-
 }
 
 struct GasStation: Decodable {
-
     var zipcode: String
     var address: String
     var schedule: String
@@ -76,5 +73,4 @@ struct GasStation: Decodable {
             price = priceAux.replacingOccurrences(of: ",", with: ".")
         }
     }
-
 }

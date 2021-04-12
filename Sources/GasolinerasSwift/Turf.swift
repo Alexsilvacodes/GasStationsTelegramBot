@@ -12,7 +12,6 @@ public typealias LineSegment = (CLLocationCoordinate2D, CLLocationCoordinate2D)
 
 
 public struct Turf {
-    
     /**
      Returns the intersection of two line segments.
      */

@@ -10,13 +10,12 @@ import CoreLocation
 #endif
 import Telegrammer
 
-guard let token = Enviroment.get("GASOLINERAS_TOKEN") else {
+guard let token = Enviroment.get("GASOLINERAS_TOKEN"), Enviroment.get("MAPBOX_TOKEN") != nil else {
     print("Token not available")
     exit(1)
 }
 
 class GasStationController {
-
     let bot: Bot
     var productID: String
 
@@ -35,7 +34,7 @@ class GasStationController {
 
             switch result {
             case .success(let response):
-                let desiredProducts = ["G98", "GOA", "NGO", "G95", "GLP", "GNC", "GNL"]
+                let desiredProducts = ["G98E5", "G98E10", "GOA", "NGO", "G95E5", "G95E10", "GLP", "GNC", "GNL"]
                 let products = response.filter { desiredProducts.contains($0.shortname) }
                 var buttons: [InlineKeyboardButton] = []
                 products.forEach { product in
@@ -130,7 +129,7 @@ class GasStationController {
                     resultText += "_Nombre:_ *\(gasStation.name)* / _Localidad:_ *\(gasStation.city)*\n"
                     resultText += "🕐 *\(gasStation.schedule)*\n"
                     resultText += "💰 _Precio:_ *\(gasStation.price!) €*\n"
-                    resultText += "🌍 [Ver en mapa](https://www.google.com/maps/place/\(gasStation.latitude)+\(gasStation.longitude)/@\(gasStation.latitude),\(gasStation.longitude),13z)\n\n"
+                    resultText += "🌍 [Ver en mapa](https://www.google.com/maps/place/\(gasStation.latitude)+\(gasStation.longitude)/@\(gasStation.latitude),\(gasStation.longitude),15z)\n\n"
                     num += 1
                 }
                 if gasStations.isEmpty {
@@ -154,7 +153,6 @@ class GasStationController {
             }
         }
     }
-
 }
 
 do {

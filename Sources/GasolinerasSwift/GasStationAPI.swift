@@ -17,7 +17,6 @@ enum NetworkError: Error {
 }
 
 class GasStationAPI {
-
     enum Constants: String {
         case serverURL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes"
         case listProductsPath = "/Listados/ProductosPetroliferos"
@@ -25,28 +24,23 @@ class GasStationAPI {
     }
 
     class Helper {
-
         static func generateImageURL(_ gasStations: [GasStation], location: CLLocationCoordinate2D) -> String {
-            guard let googleAPI = Enviroment.get("GOOGLE_API") else {
+            guard let mapboxToken = Enviroment.get("MAPBOX_TOKEN") else {
                 return ""
             }
 
-            var imageURL = """
-            https://maps.googleapis.com/maps/api/staticmap?center=\(location.latitude),\
-            \(location.longitude)&zoom=13&size=1024x1024&maptype=hybrid
-            """
-            var num = 1
+            var imageURL = "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/"
 
+            var markers: [String] = []
             gasStations.forEach { gasStation in
-                imageURL += "&markers=color:red%7Clabel:\(num)%7C\(gasStation.latitude),\(gasStation.longitude)"
-                num += 1
+                markers.append("pin-s-\(markers.count + 1)+ff0004(\(gasStation.longitude),\(gasStation.latitude))")
             }
 
-            imageURL += "&markers=color:blue%7C\(location.latitude),\(location.longitude)"
-            imageURL += "&key=\(googleAPI)"
+            imageURL += markers.joined(separator: ",")
+
+            imageURL += "/\(location.longitude),\(location.latitude),12/1024x1024?access_token=\(mapboxToken)"
             return imageURL
         }
-        
     }
 
     static let shared = GasStationAPI()
@@ -102,5 +96,4 @@ class GasStationAPI {
         }
         task.resume()
     }
-
 }
