@@ -1,4 +1,4 @@
-FROM swift:5.7
+FROM swift:5.6.3
 
 RUN apt update && apt install libssl-dev -y
 RUN mkdir /gas-stations-spain
