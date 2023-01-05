@@ -1,4 +1,4 @@
-FROM futurejones/swiftlang
+FROM swiftlang/swift
 
 RUN apt update && apt install libssl-dev -y
 RUN mkdir /gas-stations-spain
